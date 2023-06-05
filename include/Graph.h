@@ -1,33 +1,43 @@
 #ifndef Graph_h
 #define Graph_h
-
+#define NULL __null
 
 class Node
 {
  public:
  char name;
  Node * next;
-};
 
+Node()
+{
+
+}
+ Node(char vertex )
+ {
+    name = vertex;
+    next = NULL;
+ }
+};
 
 
 class Graph
 {
 public:
-Node* AdjacencyList = new Node;
+Node* AdjacencyList = new Node(10);
 int size = 0;
 bool isdirected; 
 
-    Graph(bool d=false) ;
+    Graph(bool d = false) ;
     ~Graph();
+
+    void addVertice(char vertex);
+    void addEdge(char vertex1, char vertex2);
     void removeEdge(char vertex1,char  vertex2);
     int numVertices();
-    int numEdges();
-    int indegree(char vertex);
     int outdegree(char vertex);
-    int degree(char vertex);
-    char neighbours(char vertex);
+    void neighbours(char vertex);
     bool neighbour(char vertex1,char vertex2);
+
 };
 
 
