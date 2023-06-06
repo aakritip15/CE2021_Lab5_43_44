@@ -38,8 +38,12 @@ bool isdirected;
     void neighbours(char vertex);
     bool neighbour(char vertex1,char vertex2);
 
+    bool is_empty();
+    bool isDirected():
+    int degree(char vertex);
+    int indegree(char vertex);
+    int numEdges();
+    void removeVertice(char vertex);
+
 };
-
-
-
 #endif

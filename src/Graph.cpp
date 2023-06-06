@@ -219,3 +219,112 @@ void Graph::removeEdge(char vertex1, char vertex2)
         }
     }
 }
+
+
+// Remaining portion of graph
+
+
+int Graph::indegree(char vertex)
+{
+    int indegree = 0;
+
+    for (int i = 0; i < size; i++)
+    {
+        Node *neighbour = AdjacencyList[i].next;
+        while (neighbour != nullptr)
+        {
+            if (neighbour->name == vertex)
+            {
+                if (AdjacencyList[i].name == vertex)
+                {
+                    if (isdirected)
+                    {
+                        indegree = indegree + 2;
+                    }
+                    else
+                    {
+                        indegree = indegree + 1;
+                    }
+                }
+                else
+                {
+                    indegree = indegree + 1;
+                }
+            }
+            
+            neighbour = neighbour->next;
+        }
+    }
+
+    return indegree;
+}
+
+int Graph::degree(char vertex)
+{
+    int degree = 0;
+    if (isdirected)
+    {
+        degree = indegree(vertex) + outdegree(vertex);
+    }
+    else
+    {
+        degree = indegree(vertex);
+    }
+
+    return degree;
+}
+
+void Graph::removeVertice(char vertex)
+{
+    // Removing vertex from adjacency list and shifting other vertex
+    for (int i = 0; i < size; i++)
+    {
+        if (AdjacencyList[i].name == vertex)
+        {
+            for (int j = i; j < size - 1; j++)
+            {
+                AdjacencyList[j] = AdjacencyList[j + 1];
+            }
+        }
+    }
+    size = size - 1;
+
+    //Removing every edge containg the vertex
+    for (int j = 0; j < size; j++)
+    {
+        Node *neighbour = AdjacencyList[j].next;
+        Node *vertice = &AdjacencyList[j];
+        bool flag = true;
+        while (flag)
+        {
+            if(neighbour == nullptr)
+            {
+                flag = false;
+            }
+            if (neighbour->name == vertex)
+            {
+                vertice->next = neighbour->next;
+                flag = false;
+            continue;
+            }
+            
+            vertice = neighbour;
+            neighbour = neighbour->next;
+        }
+    }
+}
+
+int Graph::numEdges()
+{
+    int num = 0;
+    for (int i = 0; i < size; i++)
+    {
+        while (AdjacencyList[i].next != NULL)
+        {
+            num = num + 1;
+        }
+    }
+    return num;
+}
+
+

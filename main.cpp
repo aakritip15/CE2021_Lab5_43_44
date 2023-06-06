@@ -39,4 +39,17 @@ int main()
   cout << "The outdegree of A is " << graph.outdegree('A');
   cout << "Number of Vertice: " << graph.numVertices()<<endl;
   cout << "Is B and A neighbour: " << graph.neighbour('A','B') <<endl;
+
+  // Print the indegree and degree of vertex 'A'
+  cout << "Indegree of vertex A: " << graph.indegree('A')<<endl;
+  cout << "Degree of vertex A: " << graph.degree('A')<<endl;
+
+ // Remove vertex 'B' and print the updated graph information
+
+    graph.removeVertice('B');
+    cout << "Number of vertices after removing B: " << graph.numVertices() << endl;
+    cout << "Number of edges after removing B: " << graph.numEdges() << endl;
+
+    return 0;
+
 }
